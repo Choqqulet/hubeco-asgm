@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Energy · HubEco</title>
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/responsive.css">
+</head>
+<body>
+  <header class="header">
+    <div class="brand"><a href="./">HubEco</a> · Energy</div>
+    <nav><a class="nav-toggle" href="./login.html">Login</a></nav>
+  </header>
+  <main class="container">
+    
+<section class="card">
+  <h3>Energy Tips</h3>
+  <div id="tips"></div>
+</section>
+<section class="card">
+  <h3>Savings Calculator</h3>
+  <p class="muted">Estimate monthly savings from switching bulbs/appliances.</p>
+  <div>
+    <label>Wattage <input id="watt" type="number" value="9"></label>
+    <label>Hours/day <input id="hours" type="number" value="5"></label>
+    <label>kWh price (RM) <input id="price" type="number" value="0.57" step="0.01"></label>
+    <button class="btn" id="calc">Calculate</button>
+  </div>
+  <p id="result" class="muted"></p>
+</section>
+<script type="module" src="../src/js/energy.js"></script>
+
+  </main>
+  <footer>© 2025 HubEco</footer>
+  <script type="module" src="../src/js/ui.js"></script>
+</body>
+</html>
