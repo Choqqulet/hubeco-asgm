@@ -1,28 +1,283 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eco Swap · HubEco</title>
-  <link rel="stylesheet" href="./assets/css/base.css">
-  <link rel="stylesheet" href="./assets/css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubEco - Campus Swap</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-  <header class="header">
-    <div class="brand"><a href="./">HubEco</a> · Eco Swap</div>
-    <nav><a class="nav-toggle" href="./login.html">Login</a></nav>
-  </header>
-  <main class="container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
-<section class="card">
-  <h3>Eco Swap</h3>
-  <button class="btn" id="add">Add Listing</button>
-  <div id="swap-list" class="grid" style="margin-top:12px"></div>
-</section>
-<script type="module" src="../src/js/swap.js"></script>
+    <div class="app-container">
+        <header class="header" id="header" role="banner">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>HubEco</h1>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Main navigation">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="recycling.html" class="nav-link">Recycling</a>
+                <a href="energy.html" class="nav-link">Energy</a>
+                <a href="garden.html" class="nav-link">Garden</a>
+                <a href="swap.html" class="nav-link active" aria-current="page">Swap</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </nav>
+        </header>
 
-  </main>
-  <footer>© 2025 HubEco</footer>
-  <script type="module" src="../src/js/ui.js"></script>
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar navigation">
+            <div class="sidebar-content">
+                <div class="sidebar-logo">
+                    <h2>HubEco</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="sidebar-link">
+                        <span class="sidebar-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="recycling.html" class="sidebar-link">
+                        <span class="sidebar-icon">♻️</span>
+                        Recycling
+                    </a>
+                    <a href="energy.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚡</span>
+                        Energy
+                    </a>
+                    <a href="garden.html" class="sidebar-link">
+                        <span class="sidebar-icon">🌱</span>
+                        Garden
+                    </a>
+                    <a href="swap.html" class="sidebar-link active" aria-current="page">
+                        <span class="sidebar-icon">🔄</span>
+                        Swap
+                    </a>
+                    <a href="admin.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚙️</span>
+                        Admin
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content" id="main-content" role="main">
+            <div class="page-header">
+                <h1 class="page-title">Campus Swap</h1>
+                <p class="page-subtitle">Reduce waste by sharing and exchanging items with fellow students</p>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="search-section">
+                <div class="glass-card">
+                    <div class="search-controls">
+                        <div class="search-input-group">
+                            <input type="text" id="searchInput" class="form-input" placeholder="Search items...">
+                            <button class="btn btn-primary" onclick="searchItems()">Search</button>
+                        </div>
+                        <div class="filter-controls">
+                            <select id="categoryFilter" class="form-select">
+                                <option value="">All Categories</option>
+                                <option value="textbooks">Textbooks</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="furniture">Furniture</option>
+                                <option value="clothing">Clothing</option>
+                                <option value="supplies">School Supplies</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <select id="conditionFilter" class="form-select">
+                                <option value="">Any Condition</option>
+                                <option value="new">Like New</option>
+                                <option value="good">Good</option>
+                                <option value="fair">Fair</option>
+                            </select>
+                            <button class="btn btn-secondary" onclick="openModal('postItemModal')">
+                                Post Item
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Items -->
+            <div class="items-section">
+                <h2 class="section-title">Available Items</h2>
+                <div class="loading-skeleton" id="itemsSkeleton">
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line short"></div>
+                </div>
+                <div class="items-grid" id="itemsGrid" style="display: none;">
+                    <div class="item-card glass-card">
+                        <div class="item-image">
+                            <img src="/placeholder.svg?height=200&width=300" alt="Calculus textbook">
+                        </div>
+                        <div class="item-details">
+                            <h3 class="item-title">Calculus Textbook</h3>
+                            <p class="item-description">Stewart Calculus 8th Edition. Great condition, minimal highlighting.</p>
+                            <div class="item-meta">
+                                <span class="badge badge-success">Like New</span>
+                                <span class="item-category">Textbooks</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="btn btn-primary" onclick="contactOwner('item1')">Contact Owner</button>
+                                <button class="btn btn-secondary" onclick="saveItem('item1')">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-card glass-card">
+                        <div class="item-image">
+                            <img src="/placeholder.svg?height=200&width=300" alt="Desk lamp">
+                        </div>
+                        <div class="item-details">
+                            <h3 class="item-title">LED Desk Lamp</h3>
+                            <p class="item-description">Adjustable LED desk lamp with USB charging port. Perfect for studying.</p>
+                            <div class="item-meta">
+                                <span class="badge badge-info">Good</span>
+                                <span class="item-category">Electronics</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="btn btn-primary" onclick="contactOwner('item2')">Contact Owner</button>
+                                <button class="btn btn-secondary" onclick="saveItem('item2')">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-card glass-card">
+                        <div class="item-image">
+                            <img src="/placeholder.svg?height=200&width=300" alt="Mini refrigerator">
+                        </div>
+                        <div class="item-details">
+                            <h3 class="item-title">Mini Refrigerator</h3>
+                            <p class="item-description">Compact fridge perfect for dorm rooms. Energy efficient and quiet.</p>
+                            <div class="item-meta">
+                                <span class="badge badge-info">Good</span>
+                                <span class="item-category">Furniture</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="btn btn-primary" onclick="contactOwner('item3')">Contact Owner</button>
+                                <button class="btn btn-secondary" onclick="saveItem('item3')">Save</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item-card glass-card">
+                        <div class="item-image">
+                            <img src="/placeholder.svg?height=200&width=300" alt="Winter jacket">
+                        </div>
+                        <div class="item-details">
+                            <h3 class="item-title">Winter Jacket</h3>
+                            <p class="item-description">Warm winter jacket, size Medium. Great for cold campus walks.</p>
+                            <div class="item-meta">
+                                <span class="badge badge-warning">Fair</span>
+                                <span class="item-category">Clothing</span>
+                            </div>
+                            <div class="item-actions">
+                                <button class="btn btn-primary" onclick="contactOwner('item4')">Contact Owner</button>
+                                <button class="btn btn-secondary" onclick="saveItem('item4')">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Listings -->
+            <div class="my-listings">
+                <h2 class="section-title">My Listings</h2>
+                <div class="glass-card">
+                    <div class="listing-item">
+                        <div class="listing-info">
+                            <h3 class="listing-title">Chemistry Lab Manual</h3>
+                            <p class="listing-status">Active • 3 interested users</p>
+                        </div>
+                        <div class="listing-actions">
+                            <button class="btn btn-small btn-secondary">Edit</button>
+                            <button class="btn btn-small btn-danger">Remove</button>
+                        </div>
+                    </div>
+                    <div class="listing-item">
+                        <div class="listing-info">
+                            <h3 class="listing-title">Desk Chair</h3>
+                            <p class="listing-status">Active • 1 interested user</p>
+                        </div>
+                        <div class="listing-actions">
+                            <button class="btn btn-small btn-secondary">Edit</button>
+                            <button class="btn btn-small btn-danger">Remove</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Post Item Modal -->
+    <div class="modal-overlay" id="postItemModal" role="dialog" aria-labelledby="postItemModal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="postItemModal-title">Post New Item</h3>
+                <button class="modal-close" onclick="closeModal('postItemModal')" aria-label="Close modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="postItemForm">
+                    <div class="form-group">
+                        <label for="itemTitle" class="form-label">Item Title <span class="required">*</span></label>
+                        <input type="text" id="itemTitle" name="itemTitle" class="form-input" 
+                               placeholder="Enter item title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemCategory" class="form-label">Category <span class="required">*</span></label>
+                        <select id="itemCategory" name="itemCategory" class="form-select" required>
+                            <option value="">Select category</option>
+                            <option value="textbooks">Textbooks</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="clothing">Clothing</option>
+                            <option value="supplies">School Supplies</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemCondition" class="form-label">Condition <span class="required">*</span></label>
+                        <select id="itemCondition" name="itemCondition" class="form-select" required>
+                            <option value="">Select condition</option>
+                            <option value="new">Like New</option>
+                            <option value="good">Good</option>
+                            <option value="fair">Fair</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="itemDescription" class="form-label">Description <span class="required">*</span></label>
+                        <textarea id="itemDescription" name="itemDescription" class="form-textarea" 
+                                  placeholder="Describe your item..." required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMethod" class="form-label">Preferred Contact Method</label>
+                        <select id="contactMethod" name="contactMethod" class="form-select">
+                            <option value="email">Email</option>
+                            <option value="phone">Phone</option>
+                            <option value="message">In-app Message</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal('postItemModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="submitItem()">Post Item</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/swap.js"></script>
 </body>
 </html>

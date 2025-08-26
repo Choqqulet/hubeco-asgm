@@ -1,28 +1,280 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin · HubEco</title>
-  <link rel="stylesheet" href="./assets/css/base.css">
-  <link rel="stylesheet" href="./assets/css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubEco - Admin Dashboard</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-  <header class="header">
-    <div class="brand"><a href="./">HubEco</a> · Admin</div>
-    <nav><a class="nav-toggle" href="./login.html">Login</a></nav>
-  </header>
-  <main class="container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
-<section class="card">
-  <h3>Admin Panel</h3>
-  <p class="muted">Simple CRUD for recycling points, schedules, tips, gardens, and swap items.</p>
-  <div id="admin-panels" class="grid"></div>
-</section>
-<script type="module" src="../src/js/admin.js"></script>
+    <div class="app-container">
+        <header class="header" id="header" role="banner">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>HubEco</h1>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Main navigation">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="recycling.html" class="nav-link">Recycling</a>
+                <a href="energy.html" class="nav-link">Energy</a>
+                <a href="garden.html" class="nav-link">Garden</a>
+                <a href="swap.html" class="nav-link">Swap</a>
+                <a href="admin.html" class="nav-link active" aria-current="page">Admin</a>
+            </nav>
+        </header>
 
-  </main>
-  <footer>© 2025 HubEco</footer>
-  <script type="module" src="../src/js/ui.js"></script>
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar navigation">
+            <div class="sidebar-content">
+                <div class="sidebar-logo">
+                    <h2>HubEco</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="sidebar-link">
+                        <span class="sidebar-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="recycling.html" class="sidebar-link">
+                        <span class="sidebar-icon">♻️</span>
+                        Recycling
+                    </a>
+                    <a href="energy.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚡</span>
+                        Energy
+                    </a>
+                    <a href="garden.html" class="sidebar-link">
+                        <span class="sidebar-icon">🌱</span>
+                        Garden
+                    </a>
+                    <a href="swap.html" class="sidebar-link">
+                        <span class="sidebar-icon">🔄</span>
+                        Swap
+                    </a>
+                    <a href="admin.html" class="sidebar-link active" aria-current="page">
+                        <span class="sidebar-icon">⚙️</span>
+                        Admin
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content" id="main-content" role="main">
+            <div class="page-header">
+                <h1 class="page-title">Admin Dashboard</h1>
+                <p class="page-subtitle">Manage campus sustainability programs and monitor system health</p>
+            </div>
+
+            <div class="content-grid">
+                <!-- System Overview -->
+                <div class="glass-card highlight">
+                    <h2 class="section-title">System Overview</h2>
+                    <div class="loading-skeleton" id="systemSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="system-stats" id="systemContent" style="display: none;">
+                        <div class="metric metric-green">
+                            <span class="metric-value">1,247</span>
+                            <span class="metric-label">active users</span>
+                        </div>
+                        <div class="metric metric-blue">
+                            <span class="metric-value">98.7%</span>
+                            <span class="metric-label">uptime</span>
+                        </div>
+                        <div class="metric metric-orange">
+                            <span class="metric-value">156</span>
+                            <span class="metric-label">daily activities</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management -->
+                <div class="glass-card">
+                    <h2 class="section-title">User Management</h2>
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" onclick="openModal('addUserModal')">Add User</button>
+                        <button class="btn btn-secondary" onclick="exportUsers()">Export Users</button>
+                    </div>
+                    <div class="user-stats">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Users</span>
+                            <span class="stat-value">1,247</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Active This Week</span>
+                            <span class="stat-value">892</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">New This Month</span>
+                            <span class="stat-value">156</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Program Analytics -->
+                <div class="glass-card">
+                    <h2 class="section-title">Program Analytics</h2>
+                    <div class="loading-skeleton" id="analyticsSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="analytics-content" id="analyticsContent" style="display: none;">
+                        <div class="program-stat">
+                            <span class="program-name">Recycling</span>
+                            <div class="program-bar">
+                                <div class="program-fill" style="width: 85%"></div>
+                            </div>
+                            <span class="program-value">85%</span>
+                        </div>
+                        <div class="program-stat">
+                            <span class="program-name">Energy</span>
+                            <div class="program-bar">
+                                <div class="program-fill" style="width: 72%"></div>
+                            </div>
+                            <span class="program-value">72%</span>
+                        </div>
+                        <div class="program-stat">
+                            <span class="program-name">Garden</span>
+                            <div class="program-bar">
+                                <div class="program-fill" style="width: 68%"></div>
+                            </div>
+                            <span class="program-value">68%</span>
+                        </div>
+                        <div class="program-stat">
+                            <span class="program-name">Swap</span>
+                            <div class="program-bar">
+                                <div class="program-fill" style="width: 91%"></div>
+                            </div>
+                            <span class="program-value">91%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="glass-card">
+                    <h2 class="section-title">Recent Admin Activity</h2>
+                    <div class="loading-skeleton" id="adminActivitySkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="admin-activity" id="adminActivityContent" style="display: none;">
+                        <div class="activity-item">
+                            <span class="activity-text">Updated recycling guidelines</span>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-text">Added new garden plot section</span>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-text">Approved 15 swap listings</span>
+                            <span class="activity-time">2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Management Sections -->
+            <div class="management-sections">
+                <h2 class="section-title">System Management</h2>
+                <div class="management-grid">
+                    <div class="glass-card">
+                        <h3 class="management-title">Content Moderation</h3>
+                        <p class="management-description">Review and moderate user-generated content across all platforms.</p>
+                        <div class="management-stats">
+                            <span class="badge badge-warning">12 pending</span>
+                        </div>
+                        <button class="btn btn-primary">Review Content</button>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 class="management-title">Garden Management</h3>
+                        <p class="management-description">Manage garden plots, events, and community activities.</p>
+                        <div class="management-stats">
+                            <span class="badge badge-info">45 active plots</span>
+                        </div>
+                        <button class="btn btn-primary">Manage Garden</button>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 class="management-title">Energy Monitoring</h3>
+                        <p class="management-description">Configure energy monitoring systems and set conservation goals.</p>
+                        <div class="management-stats">
+                            <span class="badge badge-success">All systems online</span>
+                        </div>
+                        <button class="btn btn-primary">Configure Energy</button>
+                    </div>
+
+                    <div class="glass-card">
+                        <h3 class="management-title">Reports & Analytics</h3>
+                        <p class="management-description">Generate detailed reports on sustainability metrics and user engagement.</p>
+                        <div class="management-stats">
+                            <span class="badge badge-info">Weekly report ready</span>
+                        </div>
+                        <button class="btn btn-primary">View Reports</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add User Modal -->
+    <div class="modal-overlay" id="addUserModal" role="dialog" aria-labelledby="addUserModal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="addUserModal-title">Add New User</h3>
+                <button class="modal-close" onclick="closeModal('addUserModal')" aria-label="Close modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addUserForm">
+                    <div class="form-group">
+                        <label for="userName" class="form-label">Full Name <span class="required">*</span></label>
+                        <input type="text" id="userName" name="userName" class="form-input" 
+                               placeholder="Enter full name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail" class="form-label">Email <span class="required">*</span></label>
+                        <input type="email" id="userEmail" name="userEmail" class="form-input" 
+                               placeholder="Enter email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userRole" class="form-label">Role <span class="required">*</span></label>
+                        <select id="userRole" name="userRole" class="form-select" required>
+                            <option value="">Select role</option>
+                            <option value="student">Student</option>
+                            <option value="staff">Staff</option>
+                            <option value="admin">Administrator</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="userDepartment" class="form-label">Department</label>
+                        <input type="text" id="userDepartment" name="userDepartment" class="form-input" 
+                               placeholder="Enter department (optional)">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal('addUserModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="submitUser()">Add User</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/admin.js"></script>
 </body>
 </html>

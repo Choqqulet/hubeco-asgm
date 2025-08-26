@@ -1,48 +1,198 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HubEco – Campus Green Hub</title>
-  <link rel="stylesheet" href="./assets/css/base.css">
-  <link rel="stylesheet" href="./assets/css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubEco - Campus Sustainability Dashboard</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-  <header class="header">
-    <div class="brand">HubEco 🌱</div>
-    <nav>
-      <a class="nav-toggle" href="./login.html">Login</a>
-    </nav>
-  </header>
-  <main class="container">
-    <section class="grid cards">
-      <article class="card">
-        <h3>Recycling</h3>
-        <p class="muted">Find campus recycling points & pickup schedules.</p>
-        <a class="btn" href="./recycle.html">Open</a>
-      </article>
-      <article class="card">
-        <h3>Energy Tips</h3>
-        <p class="muted">Reduce dorm energy usage with a simple checklist.</p>
-        <a class="btn" href="./energy.html">Open</a>
-      </article>
-      <article class="card">
-        <h3>Community Garden</h3>
-        <p class="muted">Join projects & see available plots.</p>
-        <a class="btn" href="./garden.html">Open</a>
-      </article>
-      <article class="card">
-        <h3>Eco Swap</h3>
-        <p class="muted">List/reuse items with your campus community.</p>
-        <a class="btn" href="./swap.html">Open</a>
-      </article>
-      <article class="card">
-        <h3>Admin</h3>
-        <p class="muted">Manage schedules, tips, gardens, and listings.</p>
-        <a class="btn" href="./admin.html">Open</a>
-      </article>
-    </section>
-  </main>
-  <footer>© 2025 HubEco · On-campus sustainable living hub</footer>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <div class="app-container">
+        <!-- Enhanced header with better accessibility -->
+        <header class="header" id="header" role="banner">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>HubEco</h1>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Main navigation">
+                <a href="index.html" class="nav-link active" aria-current="page">Dashboard</a>
+                <a href="recycling.html" class="nav-link">Recycling</a>
+                <a href="energy.html" class="nav-link">Energy</a>
+                <a href="garden.html" class="nav-link">Garden</a>
+                <a href="swap.html" class="nav-link">Swap</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </nav>
+        </header>
+
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar navigation">
+            <div class="sidebar-content">
+                <div class="sidebar-logo">
+                    <h2>HubEco</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="sidebar-link active" aria-current="page">
+                        <span class="sidebar-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="recycling.html" class="sidebar-link">
+                        <span class="sidebar-icon">♻️</span>
+                        Recycling
+                    </a>
+                    <a href="energy.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚡</span>
+                        Energy
+                    </a>
+                    <a href="garden.html" class="sidebar-link">
+                        <span class="sidebar-icon">🌱</span>
+                        Garden
+                    </a>
+                    <a href="swap.html" class="sidebar-link">
+                        <span class="sidebar-icon">🔄</span>
+                        Swap
+                    </a>
+                    <a href="admin.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚙️</span>
+                        Admin
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content" id="main-content" role="main">
+            <div class="page-header">
+                <h1 class="page-title">Dashboard</h1>
+                <p class="page-subtitle">Track your campus sustainability impact</p>
+            </div>
+
+            <!-- Enhanced dashboard content with more comprehensive metrics -->
+            <div class="content-grid">
+                <!-- Weekly Impact Summary -->
+                <div class="glass-card highlight">
+                    <h2 class="section-title">Weekly Impact</h2>
+                    <div class="loading-skeleton" id="impactSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="impact-content" id="impactContent" style="display: none;">
+                        <div class="metric">
+                            <span class="metric-value">245</span>
+                            <span class="metric-label">lbs recycled</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">18%</span>
+                            <span class="metric-label">energy saved</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">32</span>
+                            <span class="metric-label">garden hours</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carbon Footprint -->
+                <div class="glass-card">
+                    <h2 class="section-title">Carbon Footprint</h2>
+                    <div class="loading-skeleton" id="carbonSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="carbon-content" id="carbonContent" style="display: none;">
+                        <div class="metric metric-green">
+                            <span class="metric-value">-2.4</span>
+                            <span class="metric-label">tons CO₂ reduced</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 68%"></div>
+                        </div>
+                        <p class="metric-label">68% of monthly goal</p>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="glass-card">
+                    <h2 class="section-title">Recent Activity</h2>
+                    <div class="loading-skeleton" id="activitySkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="activity-content" id="activityContent" style="display: none;">
+                        <div class="activity-item">
+                            <span class="activity-text">Recycled 5 bottles</span>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-text">Joined garden project</span>
+                            <span class="activity-time">1 day ago</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-text">Swapped textbook</span>
+                            <span class="activity-time">3 days ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campus Leaderboard -->
+                <div class="glass-card">
+                    <h2 class="section-title">Campus Leaderboard</h2>
+                    <div class="loading-skeleton" id="leaderboardSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="leaderboard-content" id="leaderboardContent" style="display: none;">
+                        <div class="leaderboard-item">
+                            <span class="rank">1</span>
+                            <span class="name">Engineering Dept</span>
+                            <span class="badge badge-success">1,245 pts</span>
+                        </div>
+                        <div class="leaderboard-item">
+                            <span class="rank">2</span>
+                            <span class="name">Biology Dept</span>
+                            <span class="badge badge-info">987 pts</span>
+                        </div>
+                        <div class="leaderboard-item">
+                            <span class="rank">3</span>
+                            <span class="name">Business School</span>
+                            <span class="badge badge-warning">756 pts</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h2 class="section-title">Quick Actions</h2>
+                <div class="action-grid">
+                    <button class="btn btn-primary" onclick="window.location.href='recycling.html'">
+                        Log Recycling
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='energy.html'">
+                        Track Energy
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='garden.html'">
+                        Join Garden
+                    </button>
+                    <button class="btn btn-secondary" onclick="window.location.href='swap.html'">
+                        Browse Swap
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/dashboard.js"></script>
 </body>
 </html>

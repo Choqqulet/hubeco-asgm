@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubEco - Recycling Tracker</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <div class="app-container">
+        <header class="header" id="header" role="banner">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>HubEco</h1>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Main navigation">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="recycling.html" class="nav-link active" aria-current="page">Recycling</a>
+                <a href="energy.html" class="nav-link">Energy</a>
+                <a href="garden.html" class="nav-link">Garden</a>
+                <a href="swap.html" class="nav-link">Swap</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </nav>
+        </header>
+
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar navigation">
+            <div class="sidebar-content">
+                <div class="sidebar-logo">
+                    <h2>HubEco</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="sidebar-link">
+                        <span class="sidebar-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="recycling.html" class="sidebar-link active" aria-current="page">
+                        <span class="sidebar-icon">♻️</span>
+                        Recycling
+                    </a>
+                    <a href="energy.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚡</span>
+                        Energy
+                    </a>
+                    <a href="garden.html" class="sidebar-link">
+                        <span class="sidebar-icon">🌱</span>
+                        Garden
+                    </a>
+                    <a href="swap.html" class="sidebar-link">
+                        <span class="sidebar-icon">🔄</span>
+                        Swap
+                    </a>
+                    <a href="admin.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚙️</span>
+                        Admin
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content" id="main-content" role="main">
+            <div class="page-header">
+                <h1 class="page-title">Recycling Tracker</h1>
+                <p class="page-subtitle">Log your recycling activities and track campus waste reduction</p>
+            </div>
+
+            <div class="content-grid">
+                <!-- Log Recycling Form -->
+                <div class="glass-card highlight">
+                    <h2 class="section-title">Log Recycling Activity</h2>
+                    <form id="recyclingForm" class="recycling-form">
+                        <div class="form-group">
+                            <label for="materialType" class="form-label">
+                                Material Type <span class="required">*</span>
+                            </label>
+                            <select id="materialType" name="materialType" class="form-select" required>
+                                <option value="">Select material type</option>
+                                <option value="plastic">Plastic Bottles</option>
+                                <option value="paper">Paper/Cardboard</option>
+                                <option value="glass">Glass</option>
+                                <option value="metal">Metal Cans</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="batteries">Batteries</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity" class="form-label">
+                                Quantity <span class="required">*</span>
+                            </label>
+                            <input type="number" id="quantity" name="quantity" class="form-input" 
+                                   placeholder="Enter quantity" min="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location" class="form-label">
+                                Location <span class="required">*</span>
+                            </label>
+                            <select id="location" name="location" class="form-select" required>
+                                <option value="">Select location</option>
+                                <option value="library">Library</option>
+                                <option value="cafeteria">Cafeteria</option>
+                                <option value="dorms">Dormitories</option>
+                                <option value="academic">Academic Buildings</option>
+                                <option value="gym">Recreation Center</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Log Recycling</button>
+                    </form>
+                </div>
+
+                <!-- Today's Stats -->
+                <div class="glass-card">
+                    <h2 class="section-title">Today's Recycling</h2>
+                    <div class="loading-skeleton" id="todayStatsSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="today-stats" id="todayStatsContent" style="display: none;">
+                        <div class="metric metric-green">
+                            <span class="metric-value">47</span>
+                            <span class="metric-label">items recycled</span>
+                        </div>
+                        <div class="metric metric-blue">
+                            <span class="metric-value">12.3</span>
+                            <span class="metric-label">lbs diverted</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recycling Tips -->
+                <div class="glass-card">
+                    <h2 class="section-title">Recycling Tips</h2>
+                    <div class="tips-content">
+                        <div class="tip-item">
+                            <h3 class="tip-title">Clean Before Recycling</h3>
+                            <p class="tip-text">Rinse containers to remove food residue for better processing.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h3 class="tip-title">Check Local Guidelines</h3>
+                            <p class="tip-text">Different materials have specific recycling requirements.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h3 class="tip-title">Reduce First</h3>
+                            <p class="tip-text">The best waste is no waste - reduce consumption when possible.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campus Recycling Stats -->
+                <div class="glass-card">
+                    <h2 class="section-title">Campus Stats</h2>
+                    <div class="loading-skeleton" id="campusStatsSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="campus-stats" id="campusStatsContent" style="display: none;">
+                        <div class="stat-item">
+                            <span class="stat-label">This Week</span>
+                            <span class="stat-value">1,247 lbs</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">This Month</span>
+                            <span class="stat-value">4,892 lbs</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Diversion Rate</span>
+                            <span class="stat-value">73%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Recycling Activity -->
+            <div class="recent-activity">
+                <h2 class="section-title">Recent Campus Activity</h2>
+                <div class="glass-card">
+                    <div class="loading-skeleton" id="recentActivitySkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="activity-list" id="recentActivityContent" style="display: none;">
+                        <div class="activity-item">
+                            <span class="activity-text">Engineering Building recycled 45 plastic bottles</span>
+                            <span class="activity-time">15 minutes ago</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-text">Library collected 23 lbs of paper</span>
+                            <span class="activity-time">1 hour ago</span>
+                        </div>
+                        <div class="activity-item">
+                            <span class="activity-text">Cafeteria diverted 67 glass containers</span>
+                            <span class="activity-time">2 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/recycling.js"></script>
+</body>
+</html>

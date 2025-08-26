@@ -1,38 +1,227 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Energy · HubEco</title>
-  <link rel="stylesheet" href="./assets/css/base.css">
-  <link rel="stylesheet" href="./assets/css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubEco - Energy Monitor</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-  <header class="header">
-    <div class="brand"><a href="./">HubEco</a> · Energy</div>
-    <nav><a class="nav-toggle" href="./login.html">Login</a></nav>
-  </header>
-  <main class="container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
-<section class="card">
-  <h3>Energy Tips</h3>
-  <div id="tips"></div>
-</section>
-<section class="card">
-  <h3>Savings Calculator</h3>
-  <p class="muted">Estimate monthly savings from switching bulbs/appliances.</p>
-  <div>
-    <label>Wattage <input id="watt" type="number" value="9"></label>
-    <label>Hours/day <input id="hours" type="number" value="5"></label>
-    <label>kWh price (RM) <input id="price" type="number" value="0.57" step="0.01"></label>
-    <button class="btn" id="calc">Calculate</button>
-  </div>
-  <p id="result" class="muted"></p>
-</section>
-<script type="module" src="../src/js/energy.js"></script>
+    <div class="app-container">
+        <header class="header" id="header" role="banner">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>HubEco</h1>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Main navigation">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="recycling.html" class="nav-link">Recycling</a>
+                <a href="energy.html" class="nav-link active" aria-current="page">Energy</a>
+                <a href="garden.html" class="nav-link">Garden</a>
+                <a href="swap.html" class="nav-link">Swap</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </nav>
+        </header>
 
-  </main>
-  <footer>© 2025 HubEco</footer>
-  <script type="module" src="../src/js/ui.js"></script>
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar navigation">
+            <div class="sidebar-content">
+                <div class="sidebar-logo">
+                    <h2>HubEco</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="sidebar-link">
+                        <span class="sidebar-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="recycling.html" class="sidebar-link">
+                        <span class="sidebar-icon">♻️</span>
+                        Recycling
+                    </a>
+                    <a href="energy.html" class="sidebar-link active" aria-current="page">
+                        <span class="sidebar-icon">⚡</span>
+                        Energy
+                    </a>
+                    <a href="garden.html" class="sidebar-link">
+                        <span class="sidebar-icon">🌱</span>
+                        Garden
+                    </a>
+                    <a href="swap.html" class="sidebar-link">
+                        <span class="sidebar-icon">🔄</span>
+                        Swap
+                    </a>
+                    <a href="admin.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚙️</span>
+                        Admin
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content" id="main-content" role="main">
+            <div class="page-header">
+                <h1 class="page-title">Energy Monitor</h1>
+                <p class="page-subtitle">Track campus energy consumption and conservation efforts</p>
+            </div>
+
+            <div class="content-grid">
+                <!-- Real-time Energy Usage -->
+                <div class="glass-card highlight">
+                    <h2 class="section-title">Current Usage</h2>
+                    <div class="loading-skeleton" id="currentUsageSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="current-usage" id="currentUsageContent" style="display: none;">
+                        <div class="metric metric-orange">
+                            <span class="metric-value">847</span>
+                            <span class="metric-label">kW current draw</span>
+                        </div>
+                        <div class="usage-indicator">
+                            <div class="indicator-dot moderate"></div>
+                            <span class="indicator-text">Moderate Usage</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Energy Savings -->
+                <div class="glass-card">
+                    <h2 class="section-title">Today's Savings</h2>
+                    <div class="loading-skeleton" id="savingsSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="savings-content" id="savingsContent" style="display: none;">
+                        <div class="metric metric-green">
+                            <span class="metric-value">23%</span>
+                            <span class="metric-label">vs. yesterday</span>
+                        </div>
+                        <div class="metric metric-blue">
+                            <span class="metric-value">$127</span>
+                            <span class="metric-label">cost saved</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Building Comparison -->
+                <div class="glass-card">
+                    <h2 class="section-title">Building Efficiency</h2>
+                    <div class="loading-skeleton" id="buildingsSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="buildings-content" id="buildingsContent" style="display: none;">
+                        <div class="building-item">
+                            <span class="building-name">Library</span>
+                            <div class="efficiency-bar">
+                                <div class="efficiency-fill" style="width: 92%"></div>
+                            </div>
+                            <span class="efficiency-score">92%</span>
+                        </div>
+                        <div class="building-item">
+                            <span class="building-name">Student Center</span>
+                            <div class="efficiency-bar">
+                                <div class="efficiency-fill" style="width: 78%"></div>
+                            </div>
+                            <span class="efficiency-score">78%</span>
+                        </div>
+                        <div class="building-item">
+                            <span class="building-name">Dormitories</span>
+                            <div class="efficiency-bar">
+                                <div class="efficiency-fill" style="width: 65%"></div>
+                            </div>
+                            <span class="efficiency-score">65%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conservation Tips -->
+                <div class="glass-card">
+                    <h2 class="section-title">Conservation Tips</h2>
+                    <div class="tips-content">
+                        <div class="tip-item">
+                            <h3 class="tip-title">Unplug Devices</h3>
+                            <p class="tip-text">Electronics consume power even when turned off.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h3 class="tip-title">Use Natural Light</h3>
+                            <p class="tip-text">Open blinds and work near windows during daylight hours.</p>
+                        </div>
+                        <div class="tip-item">
+                            <h3 class="tip-title">Adjust Thermostat</h3>
+                            <p class="tip-text">Small temperature changes can lead to significant savings.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Energy Challenge -->
+            <div class="energy-challenge">
+                <h2 class="section-title">Campus Energy Challenge</h2>
+                <div class="glass-card">
+                    <div class="challenge-header">
+                        <h3>Reduce Usage by 15% This Month</h3>
+                        <div class="badge badge-info">12 days left</div>
+                    </div>
+                    <div class="challenge-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 68%"></div>
+                        </div>
+                        <div class="progress-stats">
+                            <span>68% Complete</span>
+                            <span>10.2% reduction achieved</span>
+                        </div>
+                    </div>
+                    <div class="challenge-actions">
+                        <button class="btn btn-primary" onclick="joinChallenge()">Join Challenge</button>
+                        <button class="btn btn-secondary" onclick="shareProgress()">Share Progress</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Data -->
+            <div class="historical-data">
+                <h2 class="section-title">Usage History</h2>
+                <div class="glass-card">
+                    <div class="loading-skeleton" id="historySkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="history-content" id="historyContent" style="display: none;">
+                        <div class="history-item">
+                            <span class="history-date">Yesterday</span>
+                            <span class="history-usage">1,247 kWh</span>
+                            <span class="history-change decrease">-5.2%</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-date">Last Week</span>
+                            <span class="history-usage">8,934 kWh</span>
+                            <span class="history-change decrease">-12.1%</span>
+                        </div>
+                        <div class="history-item">
+                            <span class="history-date">Last Month</span>
+                            <span class="history-usage">34,567 kWh</span>
+                            <span class="history-change increase">+2.8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/energy.js"></script>
 </body>
 </html>

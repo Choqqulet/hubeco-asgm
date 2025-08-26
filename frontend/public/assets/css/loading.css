@@ -1,0 +1,333 @@
+/* HubEco Loading Styles */
+
+/* Global Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.9);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+  }
+  
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .spinner-ring {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(34, 197, 94, 0.2);
+    border-top: 4px solid var(--accent-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  .loading-text {
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+  }
+  
+  /* Small Spinner for Elements */
+  .loading-spinner-small {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .spinner-ring-small {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(34, 197, 94, 0.2);
+    border-top: 2px solid var(--accent-green);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Element Loading States */
+  .element-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .loading-message {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+  }
+  
+  /* Progress Loading */
+  .loading-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .progress-message {
+    color: var(--text-primary);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+  }
+  
+  .progress-text {
+    color: var(--text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+  }
+  
+  /* Global Loading Indicator in Header */
+  .global-loading-indicator {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+  }
+  
+  .loading-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent-green);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  /* Enhanced Skeleton Loading */
+  .loading-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+  
+  .skeleton-line {
+    height: 16px;
+    background: linear-gradient(90deg, var(--bg-tertiary) 25%, rgba(255, 255, 255, 0.1) 50%, var(--bg-tertiary) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .skeleton-line.short {
+    width: 60%;
+  }
+  
+  .skeleton-line.medium {
+    width: 80%;
+  }
+  
+  .skeleton-line.tall {
+    height: 24px;
+  }
+  
+  /* Skeleton variants for different content types */
+  .skeleton-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--bg-tertiary) 25%, rgba(255, 255, 255, 0.1) 50%, var(--bg-tertiary) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+  }
+  
+  .skeleton-image {
+    width: 100%;
+    height: 200px;
+    border-radius: var(--border-radius);
+    background: linear-gradient(90deg, var(--bg-tertiary) 25%, rgba(255, 255, 255, 0.1) 50%, var(--bg-tertiary) 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+  }
+  
+  /* Loading States for Specific Components */
+  .btn.loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+  }
+  
+  .btn.loading::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+  
+  /* Form Loading States */
+  .form-input.loading,
+  .form-select.loading,
+  .form-textarea.loading {
+    background: var(--bg-tertiary);
+    color: transparent;
+    pointer-events: none;
+    animation: skeleton-loading 1.5s infinite;
+  }
+  
+  /* Card Loading States */
+  .glass-card.loading {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .glass-card.loading::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    animation: shimmer 2s infinite;
+  }
+  
+  /* Network Status Indicators */
+  .network-status {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    font-size: var(--font-size-sm);
+    z-index: 1000;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .network-status.show {
+    transform: translateY(0);
+  }
+  
+  .network-status.offline {
+    background: rgba(249, 115, 22, 0.9);
+    color: white;
+  }
+  
+  .network-status.online {
+    background: rgba(34, 197, 94, 0.9);
+    color: white;
+  }
+  
+  /* Animations */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.5;
+      transform: scale(1.1);
+    }
+  }
+  
+  @keyframes skeleton-loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    .spinner-ring,
+    .spinner-ring-small,
+    .loading-dot,
+    .skeleton-line,
+    .skeleton-avatar,
+    .skeleton-image,
+    .btn.loading::after {
+      animation: none;
+    }
+  
+    .glass-card.loading::before {
+      animation: none;
+    }
+  
+    .loading-overlay {
+      animation: none;
+      opacity: 1;
+    }
+  }
+  
+  /* High Contrast Mode */
+  @media (prefers-contrast: high) {
+    .spinner-ring {
+      border-color: var(--text-primary);
+      border-top-color: var(--accent-green);
+    }
+  
+    .skeleton-line,
+    .skeleton-avatar,
+    .skeleton-image {
+      background: var(--text-muted);
+    }
+  }
+  
+  /* Dark Mode Adjustments */
+  @media (prefers-color-scheme: dark) {
+    .loading-overlay {
+      background: rgba(0, 0, 0, 0.95);
+    }
+  }
+  

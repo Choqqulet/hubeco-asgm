@@ -1,27 +1,272 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Garden · HubEco</title>
-  <link rel="stylesheet" href="./assets/css/base.css">
-  <link rel="stylesheet" href="./assets/css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HubEco - Community Garden</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-  <header class="header">
-    <div class="brand"><a href="./">HubEco</a> · Garden</div>
-    <nav><a class="nav-toggle" href="./login.html">Login</a></nav>
-  </header>
-  <main class="container">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     
-<section class="card">
-  <h3>Community Gardens</h3>
-  <div id="gardens" class="grid"></div>
-</section>
-<script type="module" src="../src/js/garden.js"></script>
+    <div class="app-container">
+        <header class="header" id="header" role="banner">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>HubEco</h1>
+                </div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Main navigation">
+                <a href="index.html" class="nav-link">Dashboard</a>
+                <a href="recycling.html" class="nav-link">Recycling</a>
+                <a href="energy.html" class="nav-link">Energy</a>
+                <a href="garden.html" class="nav-link active" aria-current="page">Garden</a>
+                <a href="swap.html" class="nav-link">Swap</a>
+                <a href="admin.html" class="nav-link">Admin</a>
+            </nav>
+        </header>
 
-  </main>
-  <footer>© 2025 HubEco</footer>
-  <script type="module" src="../src/js/ui.js"></script>
+        <aside class="sidebar" id="sidebar" role="navigation" aria-label="Sidebar navigation">
+            <div class="sidebar-content">
+                <div class="sidebar-logo">
+                    <h2>HubEco</h2>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="index.html" class="sidebar-link">
+                        <span class="sidebar-icon">📊</span>
+                        Dashboard
+                    </a>
+                    <a href="recycling.html" class="sidebar-link">
+                        <span class="sidebar-icon">♻️</span>
+                        Recycling
+                    </a>
+                    <a href="energy.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚡</span>
+                        Energy
+                    </a>
+                    <a href="garden.html" class="sidebar-link active" aria-current="page">
+                        <span class="sidebar-icon">🌱</span>
+                        Garden
+                    </a>
+                    <a href="swap.html" class="sidebar-link">
+                        <span class="sidebar-icon">🔄</span>
+                        Swap
+                    </a>
+                    <a href="admin.html" class="sidebar-link">
+                        <span class="sidebar-icon">⚙️</span>
+                        Admin
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="main-content" id="main-content" role="main">
+            <div class="page-header">
+                <h1 class="page-title">Community Garden</h1>
+                <p class="page-subtitle">Grow together, learn together, sustain together</p>
+            </div>
+
+            <div class="content-grid">
+                <!-- My Garden Plot -->
+                <div class="glass-card highlight">
+                    <h2 class="section-title">My Garden Plot</h2>
+                    <div class="loading-skeleton" id="plotSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="plot-content" id="plotContent" style="display: none;">
+                        <div class="plot-info">
+                            <div class="plot-number">Plot #A7</div>
+                            <div class="plot-status">
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                        </div>
+                        <div class="plot-plants">
+                            <div class="plant-item">
+                                <span class="plant-name">Tomatoes</span>
+                                <span class="plant-stage">Flowering</span>
+                            </div>
+                            <div class="plant-item">
+                                <span class="plant-name">Basil</span>
+                                <span class="plant-stage">Mature</span>
+                            </div>
+                            <div class="plant-item">
+                                <span class="plant-name">Lettuce</span>
+                                <span class="plant-stage">Seedling</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="openModal('logActivityModal')">
+                            Log Activity
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Garden Calendar -->
+                <div class="glass-card">
+                    <h2 class="section-title">Upcoming Events</h2>
+                    <div class="loading-skeleton" id="eventsSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="events-content" id="eventsContent" style="display: none;">
+                        <div class="event-item">
+                            <div class="event-date">Mar 15</div>
+                            <div class="event-details">
+                                <div class="event-title">Spring Planting Workshop</div>
+                                <div class="event-time">2:00 PM - 4:00 PM</div>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">Mar 18</div>
+                            <div class="event-details">
+                                <div class="event-title">Composting 101</div>
+                                <div class="event-time">10:00 AM - 12:00 PM</div>
+                            </div>
+                        </div>
+                        <div class="event-item">
+                            <div class="event-date">Mar 22</div>
+                            <div class="event-details">
+                                <div class="event-title">Harvest Festival</div>
+                                <div class="event-time">1:00 PM - 5:00 PM</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Garden Stats -->
+                <div class="glass-card">
+                    <h2 class="section-title">Garden Impact</h2>
+                    <div class="loading-skeleton" id="gardenStatsSkeleton">
+                        <div class="skeleton-line"></div>
+                        <div class="skeleton-line short"></div>
+                    </div>
+                    <div class="garden-stats" id="gardenStatsContent" style="display: none;">
+                        <div class="metric metric-green">
+                            <span class="metric-value">127</span>
+                            <span class="metric-label">lbs harvested</span>
+                        </div>
+                        <div class="metric metric-blue">
+                            <span class="metric-value">45</span>
+                            <span class="metric-label">active plots</span>
+                        </div>
+                        <div class="metric metric-orange">
+                            <span class="metric-value">89</span>
+                            <span class="metric-label">participants</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Plots -->
+                <div class="glass-card">
+                    <h2 class="section-title">Available Plots</h2>
+                    <div class="available-plots">
+                        <div class="plot-grid">
+                            <div class="plot-slot available" onclick="reservePlot('B3')">
+                                <div class="plot-id">B3</div>
+                                <div class="plot-size">4x8 ft</div>
+                            </div>
+                            <div class="plot-slot available" onclick="reservePlot('C1')">
+                                <div class="plot-id">C1</div>
+                                <div class="plot-size">6x6 ft</div>
+                            </div>
+                            <div class="plot-slot occupied">
+                                <div class="plot-id">C2</div>
+                                <div class="plot-size">6x6 ft</div>
+                            </div>
+                            <div class="plot-slot available" onclick="reservePlot('D5')">
+                                <div class="plot-id">D5</div>
+                                <div class="plot-size">4x12 ft</div>
+                            </div>
+                        </div>
+                        <p class="plot-legend">
+                            <span class="legend-item">
+                                <span class="legend-color available"></span>
+                                Available
+                            </span>
+                            <span class="legend-item">
+                                <span class="legend-color occupied"></span>
+                                Occupied
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Garden Resources -->
+            <div class="garden-resources">
+                <h2 class="section-title">Garden Resources</h2>
+                <div class="resource-grid">
+                    <div class="glass-card">
+                        <h3 class="resource-title">Plant Care Guide</h3>
+                        <p class="resource-description">Comprehensive guide for growing vegetables and herbs in our climate.</p>
+                        <button class="btn btn-secondary">View Guide</button>
+                    </div>
+                    <div class="glass-card">
+                        <h3 class="resource-title">Tool Library</h3>
+                        <p class="resource-description">Borrow gardening tools and equipment for your plot maintenance.</p>
+                        <button class="btn btn-secondary">Browse Tools</button>
+                    </div>
+                    <div class="glass-card">
+                        <h3 class="resource-title">Seed Exchange</h3>
+                        <p class="resource-description">Share and trade seeds with other garden community members.</p>
+                        <button class="btn btn-secondary">Join Exchange</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Log Activity Modal -->
+    <div class="modal-overlay" id="logActivityModal" role="dialog" aria-labelledby="logActivityModal-title" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="logActivityModal-title">Log Garden Activity</h3>
+                <button class="modal-close" onclick="closeModal('logActivityModal')" aria-label="Close modal">
+                    <span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="activityForm">
+                    <div class="form-group">
+                        <label for="activityType" class="form-label">Activity Type</label>
+                        <select id="activityType" name="activityType" class="form-select" required>
+                            <option value="">Select activity</option>
+                            <option value="planting">Planting</option>
+                            <option value="watering">Watering</option>
+                            <option value="weeding">Weeding</option>
+                            <option value="harvesting">Harvesting</option>
+                            <option value="composting">Composting</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration" class="form-label">Duration (hours)</label>
+                        <input type="number" id="duration" name="duration" class="form-input" 
+                               placeholder="Enter hours spent" min="0.5" step="0.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes" class="form-label">Notes</label>
+                        <textarea id="notes" name="notes" class="form-textarea" 
+                                  placeholder="Optional notes about your activity"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal('logActivityModal')">Cancel</button>
+                <button class="btn btn-primary" onclick="submitActivity()">Log Activity</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/navigation.js"></script>
+    <script type="module" src="js/garden.js"></script>
 </body>
 </html>
